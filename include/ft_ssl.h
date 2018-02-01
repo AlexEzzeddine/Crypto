@@ -6,7 +6,7 @@
 /*   By: aezzeddi <aezzeddi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 03:07:10 by aezzeddi          #+#    #+#             */
-/*   Updated: 2018/01/31 03:37:36 by aezzeddi         ###   ########.fr       */
+/*   Updated: 2018/01/31 18:12:40 by aezzeddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct			s_ssl_command
 	t_ssl_command_type	type;
 }						t_ssl_command;
 
-# define COMMANDS_SIZE 8
+# define COMMANDS_SIZE 9
 
 void					ssl_print_standard_commands(void);
 void					ssl_print_digest_commands(void);
