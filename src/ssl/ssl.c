@@ -6,7 +6,7 @@
 /*   By: aezzeddi <aezzeddi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 02:58:34 by aezzeddi          #+#    #+#             */
-/*   Updated: 2018/01/31 02:15:11 by aezzeddi         ###   ########.fr       */
+/*   Updated: 2018/01/31 18:40:14 by aezzeddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ void				ssl_help(char **args, int len)
 {
 	(void)args;
 	(void)len;
-	if (len > 1)
-		return ;
 	ssl_usage();
 	ft_putchar_fd('\n', 2);
 	ssl_print_all_commands();
