@@ -14,6 +14,15 @@
 
 t_md5_options g_md5_options = {0, 0, 0};
 
+static void md5_parse_string(char *str)
+{
+	g_md5_options.printed = 1;
+	if (str)
+		md5_read_from_string(str);
+	else
+		ft_putendl_fd("md5: option requires an argument -- s", 2);
+}
+
 void	md5_parse_args(char **args, int size)
 {
 	int i;
@@ -28,7 +37,7 @@ void	md5_parse_args(char **args, int size)
 		else if (!ft_strcmp(args[i], "-r"))
 			g_md5_options.reverse = 1;
 		else if (!ft_strcmp(args[i], "-s"))
-			md5_read_from_string(args[++i]);
+			md5_parse_string(args[++i]);
 		else
 			while (i < size)
 				md5_read_from_file(args[i++]);

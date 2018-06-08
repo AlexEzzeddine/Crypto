@@ -14,6 +14,15 @@
 
 t_sha256_options g_sha256_options = {0, 0, 0};
 
+static void sha256_parse_string(char *str)
+{
+	g_sha256_options.printed = 1;
+	if (str)
+		sha256_read_from_string(str);
+	else
+		ft_putendl_fd("sha256: option requires an argument -- s", 2);
+}
+
 void	sha256_parse_args(char **args, int size)
 {
 	int i;
@@ -28,7 +37,7 @@ void	sha256_parse_args(char **args, int size)
 		else if (!ft_strcmp(args[i], "-r"))
 			g_sha256_options.reverse = 1;
 		else if (!ft_strcmp(args[i], "-s"))
-			sha256_read_from_string(args[++i]);
+			sha256_parse_string(args[++i]);
 		else
 			while (i < size)
 				sha256_read_from_file(args[i++]);
