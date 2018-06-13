@@ -35,6 +35,7 @@ t_uchar			*base64_encode(t_uchar *message, int *len)
 		cipher = (t_uchar *)ft_strfjoin((char *)cipher, "\n");
 		*len = 4 * (*len / 3 + ((*len % 3) ? 1 : 0)) + 1;
 	}
+	cipher = add_newlines(cipher, len);
 	return (cipher);
 }
 

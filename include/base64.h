@@ -50,5 +50,6 @@ void					base64_invalid_option(char *option);
 void					base64_parse_args(char **args, int size);
 int						base64_check_padding(t_uchar *cipher, int len);
 t_uchar					base64_revchar(char ch);
+t_uchar					*add_newlines(t_uchar *cipher, int *len);
 
 #endif
