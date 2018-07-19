@@ -18,6 +18,12 @@ int		base64_open_input_fd(char *filename)
 {
 	int fd;
 
+	if (!filename)
+	{
+		ft_putendl_fd("base64: option requires an argument -- i", 2);
+		base64_usage();
+		exit(1);
+	}
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 	{
@@ -34,6 +40,12 @@ int		base64_open_output_fd(char *filename)
 {
 	int fd;
 
+	if (!filename)
+	{
+		ft_putendl_fd("base64: option requires an argument -- o", 2);
+		base64_usage();
+		exit(1);
+	}
 	fd = open(filename, O_WRONLY | O_CREAT, 0666);
 	if (fd == -1)
 	{
