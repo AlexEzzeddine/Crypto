@@ -96,6 +96,47 @@ void	run_des(t_uchar *input, t_uchar *output, int len)
 		des_3(input, output, create_3_key_schedule(g_des_options.key), len);
 }
 
+static void	des_encryption_padding(t_uchar **input, int *len)
+{
+	t_uchar *new_input;
+	int diff;
+
+	if (g_des_options.mode == Decrypt)
+		return ;
+	diff = 8 - *len % 8;
+	new_input = (t_uchar *)ft_strrealloc((char *)(*input), diff);
+	ft_memset(new_input + *len, diff, diff);
+	*len += diff;
+	free(*input);
+	*input = new_input;
+}
+
+static int des_decryption_padding(t_uchar *input, int len)
+{
+	if (g_des_options.mode == Encrypt)
+		return len;
+	int diff = input[len - 1];
+	return len - diff;
+}
+
+static void des_encryption_preprocessing()
+{
+
+}
+
+static void des_decryption_preprocessing()
+{
+
+}
+
+static void	des_preprocessing()
+{
+	if (g_des_options.mode == Encrypt)
+		des_encryption_preprocessing();
+	else
+		des_decryption_preprocessing();
+}
+
 void	des(char **args, int size)
 {
 	t_uchar	*input;
@@ -106,16 +147,27 @@ void	des(char **args, int size)
 	get_key();
 	get_ivec();
 	len = des_read_all(g_des_options.fd_in, &input);
-	close(g_des_options.fd_in);
 	if (g_des_options.use_base64 && g_des_options.mode == Decrypt)
 		input = base64_decode(input, &len);
-	if (len % 8)
-		input = (t_uchar *)ft_strrealloc((char *)input, 8 - len % 8);
-	len = 8 * (len / 8 + (len % 8 ? 1 : 0));
+	des_input_preprocessing(&input, &len);
 	output = (t_uchar *)ft_strnew(len);
 	run_des(input, output, len);
+	len = des_decryption_padding(output, len);
 	if (g_des_options.use_base64 && g_des_options.mode == Encrypt)
 		output = (t_uchar *)base64_encode(output, &len);
 	write(g_des_options.fd_out, output, len);
 	close(g_des_options.fd_out);
+}
+
+
+void	des_pbkdf()
+{
+	t_uint key[2];
+	t_uint iv[2];
+	char *md5_input;
+	t_uint *hash;
+	md5_input = ft_strjoin(g_des_options.password, g_des_options.salt);
+	hash = md5_calculate_hash(md5_input, ft_strlen(md5_input));
+	ft_memcpy(key, hash, 8);
+	ft_memcpy(iv, hash + 8, 8);
 }

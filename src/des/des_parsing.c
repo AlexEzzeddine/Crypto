@@ -62,7 +62,9 @@ void	des_usage(void)
 					"\t-v (only in cbc mode): initialization vector in hex."
 					"Example: 0123FF42dd1f0fcc\n"
 					"\t-i file: input file\n"
-					"\t-o file: output file\n", 2);
+					"\t-o file: output file\n"
+					"\t-p password: password in ascii is the next argument.\n"
+					"\t-s salt: salt in hex is the next argument.\n", 2);
 }
 
 void	des_invalid_option(char *option)
@@ -97,6 +99,10 @@ void	des_parse_args(char **args, int size)
 			g_des_options.fd_out = des_open_output_fd(args[++i]);
 		else if (!ft_strcmp(args[i], "-k"))
 			g_des_options.key = args[++i];
+		else if (!ft_strcmp(args[i], "-s"))
+			g_des_options.salt = args[++i];
+		else if (!ft_strcmp(args[i], "-p"))
+			g_des_options.password = args[++i];
 		else if (!ft_strcmp(args[i], "-v") &&
 			(!ft_strcmp(g_des_options.cipher, "des3")
 			|| !ft_strcmp(g_des_options.cipher, "des-cbc")))

@@ -38,6 +38,12 @@ typedef struct			s_des_options
 	int					fd_out;
 	char				*key;
 	char				*ivec;
+	char				*salt;
+	char				*password;
+	t_uchar				*input;
+	t_uchar				*output;
+	int					input_len;
+	int					output_len;
 }						t_des_options;
 
 void					des_ecb(t_uchar *message, t_uchar *cipher,

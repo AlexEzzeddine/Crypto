@@ -14,7 +14,7 @@
 
 t_md5_options g_md5_options = {0, 0, 0};
 
-static void md5_parse_string(char *str)
+void	md5_parse_string(char *str)
 {
 	g_md5_options.printed = 1;
 	if (str)

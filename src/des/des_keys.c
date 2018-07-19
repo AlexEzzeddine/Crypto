@@ -43,24 +43,14 @@ const int g_pc2[48] = {
 char	*normalize_key(char *old_key, int key_size)
 {
 	char	*new_key;
-	int		len;
-	int		i;
+	int len;
 
-	i = 1;
 	len = ft_strlen(old_key);
-	if (!len)
-		return (ft_strnew(key_size));
-	new_key = old_key;
-	if (len < key_size)
-	{
-		new_key = ft_strdup(old_key);
-		while (i < key_size / len)
-		{
-			new_key = ft_strfjoin(new_key, old_key);
-			i++;
-		}
-		new_key = ft_strfjoin(new_key, ft_strsub(old_key, 0, key_size % len));
-	}
+	if (len > key_size)
+		len = key_size;
+	new_key = ft_strnew(key_size + 1);
+	ft_memset(new_key, '0', key_size);
+	ft_memcpy(new_key, old_key, len);
 	return (new_key);
 }
 

@@ -14,7 +14,7 @@
 
 t_sha256_options g_sha256_options = {0, 0, 0};
 
-static void sha256_parse_string(char *str)
+void	sha256_parse_string(char *str)
 {
 	g_sha256_options.printed = 1;
 	if (str)

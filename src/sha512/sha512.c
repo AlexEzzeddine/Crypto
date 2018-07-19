@@ -14,7 +14,7 @@
 
 t_sha512_options g_sha512_options = {0, 0, 0};
 
-static void sha512_parse_string(char *str)
+void	sha512_parse_string(char *str)
 {
 	g_sha512_options.printed = 1;
 	if (str)

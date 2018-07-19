@@ -14,11 +14,15 @@
 
 t_uchar	*add_newlines(t_uchar *cipher, int *len)
 {
+	t_uchar	*newcipher;
+	int		i;
+	int		j;
+
 	if (!(*len / 64))
-		return cipher;
-	t_uchar *newcipher = malloc(*len + *len / 64);
-	int i = 0;
-	int j = 0;
+		return (cipher);
+	newcipher = malloc(*len + *len / 64);
+	i = 0;
+	j = 0;
 	while (j < *len)
 	{
 		newcipher[i] = cipher[j];
@@ -32,15 +36,18 @@ t_uchar	*add_newlines(t_uchar *cipher, int *len)
 	}
 	*len = i;
 	free(cipher);
-	return newcipher;
+	return (newcipher);
 }
 
 int		remove_whitespaces(t_uchar *msg, int len)
 {
+	int i;
+	int j;
+
 	if (!len)
-		return 0;
-	int i = 0;
-	int j = 0;
+		return (0);
+	i = 0;
+	j = 0;
 	while (j < len)
 	{
 		while (msg[j] == ' ' || msg[j] == '\n')
@@ -50,7 +57,7 @@ int		remove_whitespaces(t_uchar *msg, int len)
 		j++;
 	}
 	msg[i] = '\0';
-	return i;
+	return (i);
 }
 
 int		base64_check_padding(t_uchar *cipher, int len)
